@@ -5,8 +5,9 @@ import { Text } from "react-native";
 export default class Contact extends Component {
 
     static navigationOptions = {
-        title: 'Contact'
+        title: 'Contact Us'
     }
+
     render() {
         return <Card
             title="Contact Information">

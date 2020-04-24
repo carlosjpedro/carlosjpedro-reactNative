@@ -4,9 +4,23 @@ import Menu from './MenuComponent'
 import DishDetail from './DishDetailComponent'
 import Contact from './ContactComponent'
 import About from './AboutComponent'
-import { View, Platform, ScrollView,  SafeAreaView, StyleSheet, Image, Text } from 'react-native'
+import { View, Platform, ScrollView, SafeAreaView, StyleSheet, Image, Text } from 'react-native'
 import { createStackNavigator, createDrawerNavigator, DrawerItems } from 'react-navigation';
 import { Icon } from 'react-native-elements'
+import { connect } from 'react-redux'
+import { baseUrl } from '../shared/baseUrl'
+import { fetchComments, fetchDishes, fetchLeaders, fetchPromos } from '../redux/ActionCreators'
+
+
+
+const mapStateToProps = state => { return {} }
+
+const mapDispatchToProps = dispatch => ({
+    fetchComments: () => dispatch(fetchComments()),
+    fetchDishes: () => dispatch(fetchDishes()),
+    fetchLeaders: () => dispatch(fetchLeaders()),
+    fetchPromos: () => dispatch(fetchPromos())
+})
 
 const MenuNavigator = createStackNavigator(
     {
@@ -68,9 +82,10 @@ const ContactNavigator = createStackNavigator(
         })
     })
 
-const AboutNavigator = createStackNavigator({
-    About: { screen: About }
-},
+const AboutNavigator = createStackNavigator(
+    {
+        About: { screen: About }
+    },
     {
         navigationOptions: ({ navigation }) => ({
             headerStyle: {
@@ -93,7 +108,7 @@ const CustomDrawerContentComponent = (props) => (<ScrollView>
         <View style={styles.drawerHeader}>
             <View style={{ flex: 1 }}>
                 <Image source={require('./images/logo.png')}
-                    style={styles.drawerImage}/>
+                    style={styles.drawerImage} />
             </View>
             <View style={{ flex: 2 }}>
                 <Text style={styles.drawerHeaderText}>Ristorante Con Fusion</Text>
@@ -172,8 +187,16 @@ const styles = StyleSheet.create({
     }
 
 });
+class Main extends Component {
 
-export default class Main extends Component {
+    componentDidMount() {
+        this.props.fetchComments()
+        this.props.fetchDishes()
+        this.props.fetchLeaders()
+        this.props.fetchPromos()
+    }
+
+
     render() {
         return <View style={{
             flex: 1,
@@ -185,3 +208,5 @@ export default class Main extends Component {
         </View>
     }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main)

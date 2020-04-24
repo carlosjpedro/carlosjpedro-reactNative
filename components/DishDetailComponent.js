@@ -1,15 +1,22 @@
 import React, { Component } from 'react'
 import { View, Text, ScrollView, FlatList } from 'react-native'
 import { Card, Icon } from 'react-native-elements'
-import { DISHES } from '../shared/dishes'
-import { COMMENTS } from '../shared/comments'
+import { connect } from 'react-redux'
+
+
+const mapStateToProps = (state) => {
+    return {
+        dishes: state.dishes,
+        comments: state.comments
+    }
+}
 
 function RenderDish(props) {
     const dish = props.dish
 
     if (dish != null) return <Card
         featuredTitle={dish.name}
-        image={require('./images/uthappizza.png')}>
+        image={{ uri: baseUrl + dish.image }}>
         <Text style={{ margin: 10 }}>{dish.description}</Text>
         <Icon name={props.favorite ? 'heart' : 'heart-o'}
             raised reverse
@@ -39,14 +46,11 @@ function RenderComments(props) {
     </Card>
 }
 
-
-export default class DishDetail extends Component {
+class DishDetail extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            dishes: DISHES,
-            comments: COMMENTS,
             favorites: []
         }
     }
@@ -64,13 +68,16 @@ export default class DishDetail extends Component {
 
         return <ScrollView>
             <RenderDish
-                dish={this.state.dishes[+dishId]}
+                dish={this.props.dishes.dishes[+dishId]}
                 favorite={this.state.favorites.some(x => x === dishId)}
                 onPress={() => this.markFavorite(dishId)} />
             <RenderComments
-                comments={this.state.comments.filter(x => x.dishId === dishId)}
+                comments={this.props.comments.comments.filter(x => x.dishId === dishId)}
             />
         </ScrollView>
     }
 
 }
+
+
+export default connect(mapStateToProps)(DishDetail)

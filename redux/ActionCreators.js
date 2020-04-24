@@ -1,11 +1,11 @@
 import * as ActionsTypes from './ActionTypes'
-import { baseUrl } from '.../shared/baseUrl'
+import { baseUrl } from '../shared/baseUrl'
 
 // COMMENTS
 export const fetchComments = () => (dispatch) => {
     return fetch(baseUrl + 'comments')
-        .then(reponse => {
-            if (reponse.ok) {
+        .then(response => {            
+            if (response.ok) {
                 return response
             } else {
                 let error = new Error('Error ' + response.status + ': ' + response.statusText)
@@ -36,8 +36,8 @@ export const addComments = (comments) => ({
 export const fetchDishes = () => (dispatch) => {
     dispatch(dishesLoading())
     return fetch(baseUrl + 'dishes')
-        .then(reponse => {
-            if (reponse.ok) {
+        .then(response => {
+            if (response.ok) {
                 return response
             } else {
                 let error = new Error('Error ' + response.status + ': ' + response.statusText)
@@ -72,8 +72,8 @@ export const dishesLoading = () => ({
 export const fetchLeaders = () => (dispatch) => {
     dispatch(leadersLoading())
     return fetch(baseUrl + 'dishes')
-        .then(reponse => {
-            if (reponse.ok) {
+        .then(response => {
+            if (response.ok) {
                 return response
             } else {
                 let error = new Error('Error ' + response.status + ': ' + response.statusText)
@@ -108,8 +108,8 @@ export const leadersLoading = () => ({
 export const fetchPromos = () => (dispatch) => {
     dispatch(promosLoading())
     return fetch(baseUrl + 'dishes')
-        .then(reponse => {
-            if (reponse.ok) {
+        .then(response => {
+            if (response.ok) {
                 return response
             } else {
                 let error = new Error('Error ' + response.status + ': ' + response.statusText)

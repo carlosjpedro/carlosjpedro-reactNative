@@ -4,7 +4,7 @@ import { baseUrl } from '../shared/baseUrl'
 // COMMENTS
 export const fetchComments = () => (dispatch) => {
     return fetch(baseUrl + 'comments')
-        .then(response => {            
+        .then(response => {
             if (response.ok) {
                 return response
             } else {
@@ -33,8 +33,7 @@ export const addComments = (comments) => ({
 
 
 // DISHES
-export const fetchDishes = () => (dispatch) => {
-    dispatch(dishesLoading())
+export const fetchDishes = () => (dispatch) => {    
     return fetch(baseUrl + 'dishes')
         .then(response => {
             if (response.ok) {
@@ -58,10 +57,12 @@ export const dishesFailed = (errmess) => ({
     payload: errmess
 })
 
-export const addDishes = (dishes) => ({
-    type: ActionsTypes.ADD_DISHES,
-    payload: dishes
-})
+export const addDishes = (dishes) => {
+    return {
+        type: ActionsTypes.ADD_DISHES,
+        payload: dishes
+    }
+}
 
 export const dishesLoading = () => ({
     type: ActionsTypes.DISHES_LOADING

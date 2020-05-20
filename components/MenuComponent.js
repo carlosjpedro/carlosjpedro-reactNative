@@ -3,7 +3,7 @@ import { View, FlatList } from 'react-native'
 import { Tile } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { baseUrl } from '../shared/baseUrl'
-
+import Loading from './LoadingComponent'
 
 const mapStateToProps = (state) => {
     return {
@@ -27,6 +27,13 @@ class Menu extends Component {
             imageSrc={{ uri: baseUrl + item.image }} />
 
         const { navigate } = this.props.navigation
+
+        if (this.props.dishes.isLoading) {
+            return <Loading />
+        }
+        if (this.props.dishes.errMess) {
+            return <Text>{this.props.dishes.errMess}</Text>
+        }
 
         return <FlatList
             data={this.props.dishes.dishes}

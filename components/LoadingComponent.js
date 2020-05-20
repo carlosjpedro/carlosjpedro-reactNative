@@ -16,9 +16,9 @@ const styles = StyleSheet.create({
 
  function Loading() {
     return <View style={styles.loadingView}>
-        <ActivityIndicator size="large" color="#512DA8">
+
             <Text style={styles.loadingText}>Loading . . .</Text>
-        </ActivityIndicator>
+
     </View>
 }
 

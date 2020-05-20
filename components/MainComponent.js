@@ -8,7 +8,6 @@ import { View, Platform, ScrollView, SafeAreaView, StyleSheet, Image, Text } fro
 import { createStackNavigator, createDrawerNavigator, DrawerItems } from 'react-navigation';
 import { Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
-import { baseUrl } from '../shared/baseUrl'
 import { fetchComments, fetchDishes, fetchLeaders, fetchPromos } from '../redux/ActionCreators'
 
 

@@ -33,7 +33,7 @@ export const addComments = (comments) => ({
 
 
 // DISHES
-export const fetchDishes = () => (dispatch) => {    
+export const fetchDishes = () => (dispatch) => {
     return fetch(baseUrl + 'dishes')
         .then(response => {
             if (response.ok) {
@@ -138,4 +138,16 @@ export const addPromos = (promotions) => ({
 
 export const promosLoading = () => ({
     type: ActionsTypes.PROMOS_LOADING
+})
+
+//FavoritES
+
+export const postFavorite = (dishId) => (dispatch) => {
+    setTimeout(() => dispatch(addFavorite(dishId)), 2000)
+
+}
+
+export const addFavorite = (dishId) => ({
+    type: ActionsTypes.ADD_FAVORITE,
+    payload: dishId
 })

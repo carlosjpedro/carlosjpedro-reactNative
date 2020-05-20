@@ -44,11 +44,11 @@ class Home extends Component {
     render() {
         return <ScrollView>
             <RenderItem item={this.props.dishes.dishes.filter(x => x.featured)[0]}
-                isLoading={this.dishes.isLoading} errMess={this.dishes.errMess} />
+                isLoading={this.props.dishes.isLoading} errMess={this.props.dishes.errMess} />
             <RenderItem item={this.props.promotions.promotions.filter(x => x.featured)[0]}
-                isLoading={this.promotions.isLoading} errMess={this.promotions.errMess} />
+                isLoading={this.props.promotions.isLoading} errMess={this.props.promotions.errMess} />
             <RenderItem item={this.props.leaders.leaders.filter(x => x.featured)[0]}
-                isLoading={this.leaders.isLoading} errMess={this.leaders.errMess} />
+                isLoading={this.props.leaders.isLoading} errMess={this.props.leaders.errMess} />
         </ScrollView>
     }
 }

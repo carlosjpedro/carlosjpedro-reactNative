@@ -9,6 +9,7 @@ import { createStackNavigator, createDrawerNavigator, DrawerItems } from 'react-
 import { Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { fetchComments, fetchDishes, fetchLeaders, fetchPromos } from '../redux/ActionCreators'
+import Reservation from './ReservationComponent'
 
 
 
@@ -99,7 +100,23 @@ const AboutNavigator = createStackNavigator(
         })
     })
 
-
+const ReservationNavigator = createStackNavigator(
+    {
+        Reservation: { screen: Reservation }
+    },
+    {
+        navigationOptions: ({ navigation }) => ({
+            headerStyle: {
+                backgroundColor: '#512DA8'
+            },
+            headerLeft: <Icon name='menu' size={24}
+                color='white' onPress={() => navigation.toggleDrawer()} />,
+            headerTintColor: '#FFF',
+            headerTitleStyle: {
+                color: '#FFF'
+            }
+        })
+    })
 
 const CustomDrawerContentComponent = (props) => (<ScrollView>
     <SafeAreaView style={styles.container}
@@ -151,6 +168,15 @@ const MainNavigator = createDrawerNavigator(
             navigationOptions: {
                 title: 'Contact Us',
                 drawerLabel: 'Contact Us',
+                drawerIcon: ({ tintColor }) => <Icon name='address-card' type='font-awesome'
+                    size={22} color={tintColor} />
+            }
+        },
+        Reservation: {
+            screen: ReservationNavigator,
+            navigationOptions: {
+                title: 'Reservation',
+                drawerLabel: 'Reservation',
                 drawerIcon: ({ tintColor }) => <Icon name='address-card' type='font-awesome'
                     size={22} color={tintColor} />
             }
